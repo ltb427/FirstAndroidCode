@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
     private IntentFilter intentFilter;
     private NetWorkChangeReceiver netWorkChangeReceiver;
