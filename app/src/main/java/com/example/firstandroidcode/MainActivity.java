@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
 {
-
+    public static final String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.baidu.com"));
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("extra_data", "hello secondactivity");
                 startActivity(intent);
             }
         });
