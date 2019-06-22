@@ -22,10 +22,19 @@ public class ThirdActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:10086"));
-                startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("data_return", "hello secondactivity");
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent();
+        intent.putExtra("data_return", "hello secondactivity");
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
