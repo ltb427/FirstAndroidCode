@@ -15,13 +15,14 @@ public class SecondActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_layout);
+        Log.d(MainActivity.TAG, "SecondActivity Task id is:"+getTaskId());
         Button button2 = findViewById(R.id.button_2);
         button2.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
                 startActivity(intent);
             }
         });
