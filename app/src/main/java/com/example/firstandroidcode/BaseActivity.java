@@ -14,6 +14,7 @@ public class BaseActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         Log.d(MainActivity.TAG, getClass().getSimpleName());
+        ActivityCllector.addActivity(this);
     }
 
     @Override
@@ -21,5 +22,17 @@ public class BaseActivity extends AppCompatActivity
     {
         super.onRestart();
         Log.d(MainActivity.TAG, getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ActivityCllector.removeActivity(this);
+    }
+    @Override
+    public void onBackPressed()
+    {
+        ActivityCllector.finshiAll();
     }
 }

@@ -27,11 +27,4 @@ public class SecondActivity extends BaseActivity
             }
         });
     }
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        Log.d(MainActivity.TAG, "SecondActivity onDestroy");
-    }
 }

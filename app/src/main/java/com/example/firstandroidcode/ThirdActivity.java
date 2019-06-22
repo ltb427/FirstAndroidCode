@@ -24,14 +24,14 @@ public class ThirdActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-
+                Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
-        startActivity(intent);
+        ActivityCllector.finshiAll();
     }
 }
