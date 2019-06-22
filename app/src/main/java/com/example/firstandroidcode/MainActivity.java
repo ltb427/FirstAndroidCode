@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Intent intent = new Intent("com.example.firstactivity.ACTION_START");
+                intent.addCategory("com.example.firstactivity.MY_CATEGORY");
                 startActivity(intent);
             }
         });
