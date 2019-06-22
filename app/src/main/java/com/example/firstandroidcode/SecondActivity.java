@@ -21,29 +21,9 @@ public class SecondActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                startActivityForResult(intent, 1);
+                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
-        Intent intent = getIntent();
-        String data = intent.getStringExtra("extra_data");
-        Log.d(MainActivity.TAG, data);
-    }
-
-    @Override
-    protected void onActivityResult(int requetCode, int resultCode, Intent data)
-    {
-        switch (requetCode)
-        {
-            case 1:
-                if (RESULT_OK == resultCode)
-                {
-                    String resultData = data.getStringExtra("data_return");
-                    Log.d(MainActivity.TAG, resultData);
-                }
-                break;
-            default:
-                break;
-        }
     }
 }
