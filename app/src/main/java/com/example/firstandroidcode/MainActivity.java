@@ -29,5 +29,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Log.d(MainActivity.TAG, "MainActivity onRestart");
+    }
 }
