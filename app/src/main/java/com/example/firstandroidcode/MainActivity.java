@@ -3,6 +3,7 @@ package com.example.firstandroidcode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,17 +25,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(MainActivity.this, "you clicked button 1",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        Button button2 = findViewById(R.id.button_2);
-        button2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                finish();
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
             }
         });
     }
