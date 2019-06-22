@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondActivity">
-
+    tools:context=".ThirdActivity">
     <Button
-        android:id="@+id/button_2"
+        android:id="@+id/button_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 2"/>
-
+        android:text="Button 3"/>
 </LinearLayout>
