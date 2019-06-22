@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class ThirdActivity extends AppCompatActivity
+public class ThirdActivity extends BaseActivity
 {
 
     @Override
@@ -31,6 +31,7 @@ public class ThirdActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-
+        Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
