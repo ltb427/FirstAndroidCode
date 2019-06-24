@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
 	public static final String TAG = MainActivity.class.getSimpleName();
+	boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -28,7 +29,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId())
         {
             case R.id.button:
-                replaceFragment(new AnotherRightFragment());
+				flag = !flag;
+				if(flag)
+				{
+					replaceFragment(new AnotherRightFragment());
+				}
+                else
+				{
+					replaceFragment(new RightFragment());
+				}
                 break;
             default:
                 break;
