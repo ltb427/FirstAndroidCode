@@ -23,8 +23,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
+                SecondActivity.startSecondActivity(MainActivity.this, "param1", "param2");
             }
         });
     }
