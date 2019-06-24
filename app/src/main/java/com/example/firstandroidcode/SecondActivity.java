@@ -2,6 +2,7 @@ package com.example.firstandroidcode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,5 +27,13 @@ public class SecondActivity extends BaseActivity
                 startActivity(intent);
             }
         });
+    }
+
+    public static void startSecondActivity(Context context, String param1, String param2)
+    {
+        Intent intent = new Intent(context, SecondActivity.class);
+        intent.putExtra("param1", param1);
+        intent.putExtra("param2", param2);
+        context.startActivity(intent);
     }
 }
