@@ -28,12 +28,29 @@ public class FruitAdapter extends ArrayAdapter<Fruit>
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
         Fruit fruit = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(mResourceId, parent,
-                false);
-        ImageView imageView = (ImageView)view.findViewById(R.id.fruit_image);
-        TextView textView = (TextView)view.findViewById(R.id.fruit_text);
-        imageView.setImageResource(fruit.getmImageId());
-        textView.setText(fruit.getmName());
+        View view ;
+        ViewHolder viewHolder;
+        if (convertView == null)
+        {
+            view = LayoutInflater.from(getContext()).inflate(mResourceId, parent,
+                    false);
+            viewHolder = new ViewHolder();
+            viewHolder.imageView = (ImageView)view.findViewById(R.id.fruit_image);
+            viewHolder.textView = (TextView)view.findViewById(R.id.fruit_text);
+            view.setTag(viewHolder);
+        }
+        else
+        {
+            view = convertView;
+            viewHolder = (ViewHolder)view.getTag();
+        }
+        viewHolder.imageView.setImageResource(fruit.getmImageId());
+        viewHolder.textView.setText(fruit.getmName());
         return view;
+    }
+    class ViewHolder
+    {
+        ImageView imageView;
+        TextView textView;
     }
 }
