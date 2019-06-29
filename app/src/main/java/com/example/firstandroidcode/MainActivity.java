@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	Button btn;
 	TextView textView;
 	EditText editText;
+	ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn = findViewById(R.id.id_btn);
         textView = findViewById(R.id.id_text);
         editText = findViewById(R.id.edit_text);
+        imageView = findViewById(R.id.image_view);
+        imageView.setOnClickListener(this);
         editText.setOnClickListener(this);
         btn.setOnClickListener(this);
         textView.setOnClickListener(this);
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.edit_text:
                 Toast.makeText(MainActivity.this, editText.getText().toString(),
                         Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.image_view:
+                imageView.setImageResource(R.drawable.banana_pic);
                 break;
             default:
                 break;

@@ -31,4 +31,9 @@
         android:hint="type somthing herr"
         android:maxLines="2"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_view"
+        android:src="@drawable/apple_pic"/>
 </LinearLayout>
