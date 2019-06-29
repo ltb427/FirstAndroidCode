@@ -24,4 +24,11 @@
         android:textColor="#00ff00"
         android:text="this is a textview"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_text"
+        android:hint="type somthing herr"
+        android:maxLines="2"/>
+
 </LinearLayout>
