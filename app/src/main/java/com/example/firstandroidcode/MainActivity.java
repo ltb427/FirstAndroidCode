@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	TextView textView;
 	EditText editText;
 	ImageView imageView;
+	ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.id_text);
         editText = findViewById(R.id.edit_text);
         imageView = findViewById(R.id.image_view);
+        progressBar = findViewById(R.id.progress_bar);
         imageView.setOnClickListener(this);
         editText.setOnClickListener(this);
         btn.setOnClickListener(this);
@@ -38,8 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId())
         {
             case R.id.id_btn:
-                Toast.makeText(MainActivity.this, "You click btn!",
-                        Toast.LENGTH_SHORT).show();
+                int progress = progressBar.getProgress();
+                progress = progress + 10;
+                progressBar.setProgress(progress);
                 break;
             case R.id.id_text:
                 TextView tv = (TextView)view;
