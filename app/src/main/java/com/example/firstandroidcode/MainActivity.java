@@ -3,6 +3,7 @@ package com.example.firstandroidcode;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -43,29 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId())
         {
             case R.id.id_btn:
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("this is a dialog");
-                dialog.setMessage("something important.");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        Toast.makeText(MainActivity.this, "ok",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        Toast.makeText(MainActivity.this, "cancel",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dialog.show();
+                ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setTitle("this is progressDialog");
+                progressDialog.setMessage("Loading..");
+                progressDialog.setCancelable(true);
+                progressDialog.show();
                 break;
             case R.id.id_text:
                 TextView tv = (TextView)view;
