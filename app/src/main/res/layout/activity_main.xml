@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
@@ -13,5 +14,14 @@
         android:id="@+id/id_btn"
         android:textAllCaps="false"
         android:text="HelloWorld"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_text"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:textColor="#00ff00"
+        android:text="this is a textview"/>
 
 </LinearLayout>
