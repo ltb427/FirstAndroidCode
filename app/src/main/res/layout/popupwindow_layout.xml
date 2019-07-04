@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.firstandroidcode.SharpRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/round_layout_style"
+    app:radius="15dp"
+
+    app:backgroundColor="#80000ff0"
+    app:relativePosition="100%"
+    app:sharpSize="10dp"
     android:layout_width="532px"
     android:layout_height="310px">
     <TextView
@@ -72,4 +77,4 @@
         android:textColor="#ffffffff"
         android:gravity="center"/>
 
-</RelativeLayout>
+</com.example.firstandroidcode.SharpRelativeLayout>
