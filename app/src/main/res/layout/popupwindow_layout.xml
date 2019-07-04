@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_layout_style"
+    android:layout_width="532px"
+    android:layout_height="310px">
+    <TextView
+        android:id="@+id/id_functon_text_view"
+        android:layout_width="300px"
+        android:layout_height="70px"
+        android:layout_marginTop="24px"
+        android:layout_marginLeft="24px"
+        android:textSize="30px"
+        android:text="Enabled Function"
+        android:gravity="center"/>
+    <Switch
+        android:id="@+id/id_switch"
+        android:layout_width="100px"
+        android:layout_height="52px"
+        android:layout_marginTop="24px"
+        android:layout_marginLeft="385px"/>
+
+    <TextView
+        android:id="@+id/id_edit_text_view"
+        android:layout_width="200px"
+        android:layout_height="70px"
+        android:layout_below="@id/id_functon_text_view"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="24px"
+        android:text="Edit"
+        android:textSize="30px"
+        android:background="@drawable/round_text_view"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/id_edit_dulopte_view"
+        android:layout_width="200px"
+        android:layout_height="70px"
+        android:background="@drawable/round_text_view"
+        android:textColor="#ffffffff"
+        android:layout_below="@id/id_functon_text_view"
+        android:layout_marginLeft="285px"
+        android:layout_marginTop="24px"
+        android:layout_marginRight="24px"
+        android:text="Dulopte"
+        android:textSize="30px"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/id_edit_rename_view"
+        android:layout_width="200px"
+        android:layout_height="70px"
+        android:background="@drawable/round_text_view"
+        android:textColor="#ffffffff"
+        android:layout_below="@id/id_edit_dulopte_view"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="24px"
+        android:text="Rename"
+        android:textSize="30px"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/id_edit_remove_view"
+        android:layout_width="200px"
+        android:layout_height="70px"
+        android:layout_below="@id/id_edit_dulopte_view"
+        android:layout_marginLeft="285px"
+        android:layout_marginTop="24px"
+        android:layout_marginRight="24px"
+        android:text="Remove"
+        android:textSize="30px"
+        android:background="@drawable/round_text_view"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
+
+</RelativeLayout>
