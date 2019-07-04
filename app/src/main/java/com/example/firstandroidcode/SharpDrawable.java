@@ -7,6 +7,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 
 
 import androidx.annotation.ColorInt;
@@ -102,10 +103,15 @@ class SharpDrawable extends GradientDrawable {
             super.draw(canvas);
         } else {
             Rect bounds = getBounds();
+
             int left = bounds.left;
             int top = bounds.top;
             int right = bounds.right;
             int bottom = bounds.bottom;
+            Log.d("YUKAI", "LEFT: "+left+"\n"+
+                    "RIGHT: "+right+"\n"+
+                    "TOP: "+top+"\n"+
+                    "BOTTOM: "+bottom+"\n");
             float length;
             switch (mArrowDirection) {
                 case LEFT:

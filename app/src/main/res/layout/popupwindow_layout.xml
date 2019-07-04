@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:radius="15dp"
-
+    app:arrowDirection="left"
     app:backgroundColor="#80000ff0"
     app:relativePosition="100%"
     app:sharpSize="10dp"
-    android:layout_width="532px"
+    android:layout_width="548px"
     android:layout_height="310px">
     <TextView
         android:id="@+id/id_functon_text_view"
