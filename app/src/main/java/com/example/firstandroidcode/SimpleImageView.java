@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -130,5 +131,9 @@ public class SimpleImageView extends View
         }
         //绘制图片
         canvas.drawBitmap(mBitmap, getLeft(), getTop(), mBitmapPaint);
+        //绘制圆
+        mBitmapPaint.setColor(Color.GREEN);
+        mBitmapPaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(getLeft() + 180, getTop() + 160, 30, mBitmapPaint);
     }
 }
