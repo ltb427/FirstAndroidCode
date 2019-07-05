@@ -2,6 +2,7 @@ package com.example.firstandroidcode;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -23,6 +24,8 @@ public class SimpleImageView extends View
     private int mWidth;
     //view的高度
     private int mHeight;
+    //bitmap
+    private Bitmap mBitmap;
 
     public SimpleImageView(Context context)
     {
@@ -71,21 +74,61 @@ public class SimpleImageView extends View
         mHeight = mDrawable.getIntrinsicHeight();
     }
 
+    private int measureWidth(int mode, int width)
+    {
+        switch (mode)
+        {
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                mWidth = width;
+                break;
+            default:
+                break;
+        }
+        return mWidth;
+    }
+
+    private int measureHeight(int mode, int height)
+    {
+        switch (mode)
+        {
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                mHeight = height;
+                break;
+            default:
+                break;
+        }
+        return mHeight;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        setMeasuredDimension(mWidth, mHeight);
+        //获取宽度模式与大小
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        //获取高度的模式和大小
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        //设置view的高度
+        setMeasuredDimension(measureWidth(widthMode, width),
+                measureHeight(heightMode, height));
     }
 
     @Override
     protected void onDraw(Canvas canvas)
     {
-        if (null == mDrawable)
+        if (mBitmap == null)
         {
-            return;
+            mBitmap = Bitmap.createScaledBitmap(ImageUtils.drawableToBitamp(mDrawable),
+                    getMeasuredWidth(), getMeasuredHeight(), true);
         }
         //绘制图片
-        canvas.drawBitmap(ImageUtils.drawableToBitamp(mDrawable),
-                getLeft(), getTop(), mBitmapPaint);
+        canvas.drawBitmap(mBitmap, getLeft(), getTop(), mBitmapPaint);
     }
 }
