@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ToastView">
+        <attr name="text" format="string|reference"/>
+        <attr name="timer" format="integer"/>
+        <attr name="src" format="integer|reference"/>
+        <attr name="color" format="color|reference"/>
+        <attr name="textColor" format="color|reference"/>
+        <attr name="circleRadius" format="dimension|reference"/>
+        <attr name="imageWidth" format="dimension|reference"/>
+        <attr name="imageHeight" format="dimension|reference"/>
+        <attr name="radius">
+            <flag name="left_top" value="0x01"/>
+            <flag name="left_bottom" value="0x02"/>
+            <flag name="right_top" value="0x04"/>
+            <flag name="right_bottom" value="0x08"/>
+            <flag name="all" value="0x16"/>
+            <flag name="none" value="0x20"/>
+        </attr>
+    </declare-styleable>
+</resources>
