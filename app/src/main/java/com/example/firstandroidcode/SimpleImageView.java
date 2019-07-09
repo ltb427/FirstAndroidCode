@@ -130,7 +130,7 @@ public class SimpleImageView extends View
                     getMeasuredWidth(), getMeasuredHeight(), true);
         }
         //绘制图片
-        canvas.drawBitmap(mBitmap, getLeft(), getTop(), mBitmapPaint);
+        canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         //绘制圆
         mBitmapPaint.setColor(Color.GREEN);
         mBitmapPaint.setStyle(Paint.Style.FILL);
