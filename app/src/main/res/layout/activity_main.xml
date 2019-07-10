@@ -6,26 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <com.example.firstandroidcode.SharpRelativeLayout
-       android:layout_width="1000px"
-       android:layout_height="618px"
-       app:backgroundColor="@color/colorPrimary"
-       app:radius="100px"
-       android:layout_marginLeft="24dp"
-       android:layout_marginTop="24dp">
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="60px"
-          android:gravity="center"
-          android:id="@+id/t"
-          android:text="于凯"/>
-      <ImageView
-          android:layout_below="@id/t"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerInParent="true"
-         android:src="@drawable/ic_launcher_foreground"/>
-   </com.example.firstandroidcode.SharpRelativeLayout>
+   <Button
+       android:layout_marginTop="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/id_toast_btn"
+      android:textAllCaps="false"
+      android:text="Toast"/>
 
 </LinearLayout>
