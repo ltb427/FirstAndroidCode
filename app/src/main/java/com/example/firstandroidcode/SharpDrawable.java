@@ -143,6 +143,11 @@ class SharpDrawable extends GradientDrawable {
                     mPointFs[2].set(mPointFs[0].x + mSharpSize, bottom);
                     mRect.set(left, top, right, bottom);
                     break;
+                case NONE:
+                    mRect.set(left, top, right, bottom);
+                    break;
+                    default:
+                        break;
             }
             mPath.reset();
             mPath.addRoundRect(mRect, mCornerRadius, mCornerRadius, Path.Direction.CW);

@@ -113,10 +113,11 @@ public class SharpViewRenderProxy {
         mBorder = a.getDimension(R.styleable.SharpTextView_border, 0);
         mBackgroundColor = a.getColor(R.styleable.SharpTextView_backgroundColor, Color.GRAY);
         mBorderColor = a.getColor(R.styleable.SharpTextView_borderColor, 0);
-        int direction = a.getInt(R.styleable.SharpTextView_arrowDirection, 3);
+        int direction = a.getInt(R.styleable.SharpTextView_arrowDirection, 5);
         mRelativePosition = a.getFraction(R.styleable.SharpTextView_relativePosition, 1, 1, 0.5f);
         mSharpSize = a.getDimension(R.styleable.SharpLinearLayout_sharpSize,0);
-        switch (direction) {
+        switch (direction)
+        {
             case 1:
                 mArrowDirection = SharpView.ArrowDirection.LEFT;
                 break;
@@ -129,6 +130,10 @@ public class SharpViewRenderProxy {
             case 4:
                 mArrowDirection = SharpView.ArrowDirection.BOTTOM;
                 break;
+            case 5:
+                mArrowDirection = SharpView.ArrowDirection.NONE;
+                default:
+                    break;
         }
         int start = a.getColor(R.styleable.SharpTextView_startBgColor, -1);
         int middle  = a.getColor(R.styleable.SharpTextView_middleBgColor, -1);

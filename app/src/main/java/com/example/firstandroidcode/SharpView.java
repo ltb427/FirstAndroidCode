@@ -5,6 +5,6 @@ public interface SharpView {
     SharpViewRenderProxy getRenderProxy();
 
     enum ArrowDirection {
-        LEFT, TOP, RIGHT, BOTTOM
+        LEFT, TOP, RIGHT, BOTTOM, NONE
     }
 }

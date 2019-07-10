@@ -11,6 +11,7 @@
         <enum name="top" value="2"/>
         <enum name="right" value="3"/>
         <enum name="bottom" value="4"/>
+        <enum name="none" value="5"/>
     </attr>
     <attr name = "relativePosition" format = "fraction" />
     <attr name = "sharpSize" format = "dimension" />
