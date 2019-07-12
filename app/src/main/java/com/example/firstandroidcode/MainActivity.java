@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,8 +44,19 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            Toast.makeText(MainActivity.this, "network changes", Toast.LENGTH_SHORT)
-                    .show();
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo !=null && networkInfo.isAvailable())
+            {
+                Toast.makeText(MainActivity.this, "network is available", Toast.LENGTH_SHORT)
+                        .show();
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "network is not available", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
         }
     }
 
