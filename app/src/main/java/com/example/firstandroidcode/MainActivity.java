@@ -12,52 +12,51 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.os.Bundle;
 
 public class MainActivity extends BaseActivity
 {
     private IntentFilter intentFilter;
-    private NetWorkChangeReceiver netWorkChangeReceiver;
 	public static final String TAG = MainActivity.class.getSimpleName();
+	private LocalReceiver localReceiver;
+	private LocalBroadcastManager localBroadcastManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         intentFilter = new IntentFilter();
-        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        netWorkChangeReceiver = new NetWorkChangeReceiver();
-        //注册
-        registerReceiver(netWorkChangeReceiver, intentFilter);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        Button btn = findViewById(R.id.id_btn);
+        btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent("YUKAI");
+                localBroadcastManager.sendBroadcast(intent);
+            }
+        });
+        intentFilter.addAction("YUKAI");
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
     }
 
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        unregisterReceiver(netWorkChangeReceiver);
+        localBroadcastManager.unregisterReceiver(localReceiver);
     }
 
-    class NetWorkChangeReceiver extends BroadcastReceiver
+    class LocalReceiver extends BroadcastReceiver
     {
         @Override
         public void onReceive(Context context, Intent intent)
         {
-            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if (networkInfo !=null && networkInfo.isAvailable())
-            {
-                Toast.makeText(MainActivity.this, "network is available", Toast.LENGTH_SHORT)
-                        .show();
-            }
-            else
-            {
-                Toast.makeText(MainActivity.this, "network is not available", Toast.LENGTH_SHORT)
-                        .show();
-            }
-
+            Toast.makeText(MainActivity.this, "received local broadcast", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
