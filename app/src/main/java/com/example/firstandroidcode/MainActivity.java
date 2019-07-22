@@ -2,6 +2,7 @@ package com.example.firstandroidcode;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -20,43 +22,66 @@ public class MainActivity extends BaseActivity
 {
     private IntentFilter intentFilter;
 	public static final String TAG = MainActivity.class.getSimpleName();
-	private LocalReceiver localReceiver;
 	private LocalBroadcastManager localBroadcastManager;
+	private ForceOfflineReceiver forceOfflineReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intentFilter = new IntentFilter();
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        Button btn = findViewById(R.id.id_btn);
-        btn.setOnClickListener(new View.OnClickListener()
+        Button forceOffline = findViewById(R.id.force_offline);
+        forceOffline.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent("YUKAI");
-                localBroadcastManager.sendBroadcast(intent);
+                Intent intent = new Intent("FORCE_OFFLINE");
+                sendBroadcast(intent);
             }
         });
-        intentFilter.addAction("YUKAI");
-        localReceiver = new LocalReceiver();
-        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
     }
 
     @Override
-    protected void onDestroy()
+    protected void onResume()
     {
-        super.onDestroy();
-        localBroadcastManager.unregisterReceiver(localReceiver);
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("FORCE_OFFLINE");
+        forceOfflineReceiver = new ForceOfflineReceiver();
+        registerReceiver(forceOfflineReceiver, intentFilter);
     }
 
-    class LocalReceiver extends BroadcastReceiver
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if (forceOfflineReceiver != null)
+        {
+            unregisterReceiver(forceOfflineReceiver);
+            forceOfflineReceiver = null;
+        }
+    }
+
+    class ForceOfflineReceiver extends BroadcastReceiver
     {
         @Override
-        public void onReceive(Context context, Intent intent)
+        public void onReceive(final Context context, Intent intent)
         {
-            Toast.makeText(MainActivity.this, "received local broadcast", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Warning");
+            builder.setMessage("You are forced to be offline, Please try to login again.");
+            builder.setCancelable(false);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    ActivityCllector.finshiAll();
+                    Intent in = new Intent(context, LoginActivity.class);
+                    context.startActivity(in);
+                }
+            });
+            builder.show();
         }
     }
 }
