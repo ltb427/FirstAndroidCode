@@ -9,7 +9,16 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.EditText;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -23,12 +32,53 @@ public class MainActivity extends AppCompatActivity
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.READ_PHONE_STATE
             };
+	private EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkPermission();
+        editText = findViewById(R.id.textView);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        save(editText.getText().toString());
+        super.onDestroy();
+    }
+
+    public void save(String text)
+    {
+        FileOutputStream fileOutputStream = null;
+        BufferedWriter bufferedWriter = null;
+        try
+        {
+            fileOutputStream = openFileOutput("YUKAI", Context.MODE_PRIVATE);
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            bufferedWriter.write(text);
+            Log.d("YUKAI", text);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if (bufferedWriter != null)
+                {
+                    bufferedWriter.close();
+                    Log.d("YUKAI", "YES");
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
     //检查权限
     private void checkPermission()
