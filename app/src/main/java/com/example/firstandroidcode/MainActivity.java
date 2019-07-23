@@ -9,15 +9,20 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity
@@ -40,12 +45,16 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         checkPermission();
         editText = findViewById(R.id.textView);
+        String inputText = load();
+        if(!TextUtils.isEmpty(inputText))
+        {
+            editText.setText(inputText);
+        }
     }
 
     @Override
     protected void onDestroy()
     {
-        save(editText.getText().toString());
         super.onDestroy();
     }
 
@@ -120,6 +129,43 @@ public class MainActivity extends AppCompatActivity
         {
             finish();
         }
+    }
+
+    private String load()
+    {
+        FileInputStream fileInputStream = null;
+        BufferedReader reader = null;
+        StringBuffer context = new StringBuffer();
+        try
+        {
+            fileInputStream = openFileInput("data");
+            reader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                context.append(line);
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (reader != null)
+            {
+                try
+                {
+                    reader.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return context.toString()+"haha";
     }
 
 }
