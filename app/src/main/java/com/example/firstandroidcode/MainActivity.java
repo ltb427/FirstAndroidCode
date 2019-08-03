@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	public static final String TAG = MainActivity.class.getSimpleName();
 	private MyDatabaseHelper myDatabaseHelper;
 	private Button create_btn;
-	private Button add_data_btn;
+	private Button add_btn;
+	private Button delete_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,8 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 null,2);
         create_btn = findViewById(R.id.create_table);
         create_btn.setOnClickListener(this);
-        add_data_btn = findViewById(R.id.add_data);
-        add_data_btn.setOnClickListener(this);
+        add_btn = findViewById(R.id.add_data);
+        add_btn.setOnClickListener(this);
+        delete_btn = findViewById(R.id.delete_data);
+        delete_btn.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 db.insert("book", null, values);
                 values.clear();
                 Toast.makeText(this, "Add succeeded", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.delete_data:
+                SQLiteDatabase db1 = myDatabaseHelper.getWritableDatabase();
+                db1.delete("book", "pages > ?", new String[]{"500"});
+                Toast.makeText(this, "Delete succeeded", Toast.LENGTH_SHORT).show();
                 break;
                 default:
                     break;
