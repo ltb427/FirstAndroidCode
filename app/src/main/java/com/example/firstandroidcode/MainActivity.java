@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDatabaseHelper = new MyDatabaseHelper(MainActivity.this,"BookStore.db",
-                null,1);
+                null,2);
         Button create_btn = findViewById(R.id.create_book);
         create_btn.setOnClickListener(new View.OnClickListener()
         {
