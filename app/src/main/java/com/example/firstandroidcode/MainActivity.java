@@ -3,8 +3,10 @@ package com.example.firstandroidcode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private Button create_btn;
 	private Button add_btn;
 	private Button delete_btn;
+	private Button query_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add_btn.setOnClickListener(this);
         delete_btn = findViewById(R.id.delete_data);
         delete_btn.setOnClickListener(this);
+        query_btn = findViewById(R.id.query_data);
+        query_btn.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +69,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SQLiteDatabase db1 = myDatabaseHelper.getWritableDatabase();
                 db1.delete("book", "pages > ?", new String[]{"500"});
                 Toast.makeText(this, "Delete succeeded", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.query_data:
+                SQLiteDatabase db2 = myDatabaseHelper.getWritableDatabase();
+                //查询book表中的所有数据
+                Cursor cursor = db2.query("book", null, null, null,
+                        null, null, null);
+                int count  = 0;
+                if (cursor.moveToFirst())
+                {
+                    do
+                    {
+                        //遍历数据
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+                        String author = cursor.getString(cursor.getColumnIndex("author"));
+                        int pages = cursor.getInt(cursor.getColumnIndex("pages"));
+                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        Log.d(TAG, "book name is " + name);
+                        Log.d(TAG, "book author is " + author);
+                        Log.d(TAG, "book pages is " + pages);
+                        Log.d(TAG, "book price is " + price);
+                        ++count;
+                    }while (cursor.moveToNext());
+                    Log.d(TAG, "book number is " + count);
+                }
                 break;
                 default:
                     break;
