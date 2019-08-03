@@ -1,6 +1,20 @@
 package com.example.firstandroidcode;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,41 +22,68 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
 	public static final String TAG = MainActivity.class.getSimpleName();
+	private ForceOfflineReceiver forceOfflineReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button save_button = findViewById(R.id.save_button);
-        save_button.setOnClickListener(new View.OnClickListener()
+        Button forceOffline = findViewById(R.id.force_offline);
+        forceOffline.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                editor.putString("name", "Tom");
-                editor.putInt("age", 28);
-                editor.putBoolean("married", false);
-                editor.apply();
+                Intent intent = new Intent("FORCE_OFFLINE");
+                sendBroadcast(intent);
             }
         });
-        Button read_button = findViewById(R.id.read_button);
-        read_button.setOnClickListener(new View.OnClickListener()
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("FORCE_OFFLINE");
+        forceOfflineReceiver = new ForceOfflineReceiver();
+        registerReceiver(forceOfflineReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if (forceOfflineReceiver != null)
         {
-            @Override
-            public void onClick(View view)
+            unregisterReceiver(forceOfflineReceiver);
+            forceOfflineReceiver = null;
+        }
+    }
+
+    class ForceOfflineReceiver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(final Context context, Intent intent)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Warning");
+            builder.setMessage("You are forced to be offline, Please try to login again.");
+            builder.setCancelable(false);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
             {
-                SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
-                String name = pref.getString("name", "");
-                int age = pref.getInt("age", 0);
-                boolean married = pref.getBoolean("married", false);
-                Log.d(TAG, "name is " + name);
-                Log.d(TAG, "age is " + age);
-                Log.d(TAG, "married is " + married);
-            }
-        });
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    ActivityCllector.finshiAll();
+                    Intent in = new Intent(context, LoginActivity.class);
+                    context.startActivity(in);
+                }
+            });
+            builder.show();
+        }
     }
 }
